@@ -1,7 +1,9 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Icon, ListItem, Avatar, SearchBar } from 'react-native-elements';
 import { ScrollView } from 'react-native-web';
+import { logout } from '../services/authService';
 
 // ESTA LISTA ESTÁ AQUI TEMPORARIAMENTE PARA FINS DE TESTE, ATÉ QUE SEJA FEITA A REQUISIÇÃO PRO BACK-END COM A VERDADEIRA LISTA DE IDOSOS //
 
@@ -52,6 +54,21 @@ const list = [
 
 export default function Home({ navigation }) {
   const [search, setSearch] = React.useState('');
+  const [data, setData] = React.useState(list);
+
+  const filteredList = data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = await AsyncStorage.getItem('token');
+      if (!token) {
+        Alert.alert('Sessão expirada', 'Você precisa fazer login novamente.');
+        navigation.replace('Login');
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -68,12 +85,11 @@ export default function Home({ navigation }) {
 
         <View>
           {
-            list.map((l, i) => (
+            filteredList.map((l, i) => (
               <ListItem key={i} bottomDivider>
-                <Avatar source={{ uri: l.avatar_url }} />
+                <Avatar rounded title="MD" />
                 <ListItem.Content>
                   <ListItem.Title>{l.name}</ListItem.Title>
-                  <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
             ))
@@ -82,8 +98,12 @@ export default function Home({ navigation }) {
       </ScrollView>
 
       <View style={styles.bottomBar}>
-        <Icon name="home" type="feather" color="#fff" />
-        <Icon name="box" type="feather" color="#fff" />
+        <Icon name="home" type="feather" color="#fff" onPress={() => navigation.navigate('Home')} />
+        <Icon name="box" type="feather" color="#fff" onPress={() => navigation.navigate('Stock')} />
+        <Icon name="log-out" type="feather" color="#fff" onPress={async () => {
+          await logout();
+          navigation.replace('Login');
+        }} />
       </View>
     </View>
   );
