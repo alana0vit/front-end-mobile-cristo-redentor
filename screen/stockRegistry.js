@@ -2,36 +2,30 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-export default function Cadastro({ navigation }) {
+export default function CadastroItem({ navigation }) {
   return (
     <View style={styles.container}>
       <Input
         style={styles.input}
-        placeholder='Digite o nome do idoso'
+        placeholder='Digite o nome do item'
         inputContainerStyle={{ borderBottomWidth: 0 }}
       />
 
       <Input
         style={styles.input}
-        placeholder='Data de nascimento'
+        placeholder='Quantidade inicial'
         inputContainerStyle={{ borderBottomWidth: 0 }}
       />
 
       <Input
         style={styles.input}
-        placeholder='Digite o peso do idoso'
+        placeholder='Necessário?'
         inputContainerStyle={{ borderBottomWidth: 0 }}
       />
 
       <Input
         style={styles.input}
-        placeholder='Digite o CPF do idoso'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
-
-      <Input
-        style={styles.input}
-        placeholder='Rémedios'
+        placeholder='Categoria do item'
         inputContainerStyle={{ borderBottomWidth: 0 }}
       />
 

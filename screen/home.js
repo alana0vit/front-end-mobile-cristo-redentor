@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Icon, ListItem, Avatar, SearchBar } from 'react-native-elements';
 import { ScrollView } from 'react-native-web';
@@ -10,43 +10,43 @@ import { logout } from '../services/authService';
 const list = [
   {
     name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    avatar_url: 'PK',
   },
   {
     name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar_url: 'CG',
   },
   {
     name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    avatar_url: 'KN',
   },
   {
     name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar_url: 'DT',
   },
   {
     name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    avatar_url: 'JG',
   },
   {
     name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar_url: 'JC',
   },
   {
     name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    avatar_url: 'PK',
   },
   {
     name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar_url: 'UY',
   },
   {
     name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    avatar_url: 'HJ',
   },
   {
     name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+    avatar_url: 'MD',
   },
 ]
 
@@ -86,8 +86,13 @@ export default function Home({ navigation }) {
         <View>
           {
             filteredList.map((l, i) => (
-              <ListItem key={i} bottomDivider>
-                <Avatar rounded title="MD" />
+              <ListItem key={i} bottomDivider onPress={() => navigation.navigate('Idoso')}>
+                <Avatar
+                  rounded
+                  title={l.avatar_url}
+                  containerStyle={{ backgroundColor: '#666666' }}
+                  size="small"
+                />
                 <ListItem.Content>
                   <ListItem.Title>{l.name}</ListItem.Title>
                 </ListItem.Content>

@@ -1,22 +1,129 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, Alert } from 'react-native';
-import { Input, Button } from 'react-native-elements';
-import { login } from '../services/authService.js'
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Icon, ListItem, Avatar, SearchBar } from 'react-native-elements';
+import { ScrollView } from 'react-native-web';
+import { logout } from '../services/authService';
+
+// ESTA LISTA ESTÁ AQUI TEMPORARIAMENTE PARA FINS DE TESTE, ATÉ QUE SEJA FEITA A REQUISIÇÃO PRO BACK-END COM A VERDADEIRA LISTA DE IDOSOS //
+
+const list = [
+  {
+    name: 'Vassoura',
+    color: '#2ce8ca',
+  },
+  {
+    name: 'Dipirona',
+    color: '#2c4ae8',
+  },
+  {
+    name: 'Vassoura',
+    color: '#2ce8ca',
+  },
+  {
+    name: 'Dipirona',
+    color: '#2c4ae8',
+  },
+  {
+    name: 'Vassoura',
+    color: '#2ce8ca',
+  },
+  {
+    name: 'Dipirona',
+    color: '#2c4ae8',
+  },
+  {
+    name: 'Vassoura',
+    color: '#2ce8ca',
+  },
+  {
+    name: 'Dipirona',
+    color: '#2c4ae8',
+  },
+  {
+    name: 'Vassoura',
+    color: '#2ce8ca',
+  },
+  {
+    name: 'Dipirona',
+    color: '#2c4ae8',
+  },
+]
+
+// EXCLUIR ESTA LISTA ASSIM QUE A CONEXÃO COM O BACK-END ESTIVER ATIVA //
 
 export default function Stock({ navigation }) {
+  const [search, setSearch] = React.useState('');
+  const [data, setData] = React.useState(list);
 
-    return (
+  const filteredList = data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        <SearchBar
+          placeholder="Pesquisar..."
+          onChangeText={setSearch}
+          value={search}
+          containerStyle={styles.searchContainer}
+          inputContainerStyle={styles.searchInput}
+          lightTheme
+          round
+        />
+
         <View>
+          {
+            filteredList.map((l, i) => (
+              <ListItem key={i} bottomDivider onPress={() => navigation.navigate('Item')}>
+                <Avatar
+                  rounded
+                  containerStyle={{ backgroundColor: l.color }}
+                  size="small"
+                />
+                <ListItem.Content>
+                  <ListItem.Title>{l.name}</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            ))
+          }
         </View>
-    );
+      </ScrollView>
+
+      <View style={styles.bottomBar}>
+        <Icon name="home" type="feather" color="#fff" onPress={() => navigation.navigate('Home')} />
+        <Icon name="box" type="feather" color="#fff" onPress={() => navigation.navigate('Stock')} />
+        <Icon name="log-out" type="feather" color="#fff" onPress={async () => {
+          await logout();
+          navigation.replace('Login');
+        }} />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F7F7F7',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 30,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#F7F7F7',
+    justifyContent: 'center',
+  },
+  bottomBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 15,
+    backgroundColor: '#2CA8E8',
+    width: '100%',
+    height: 64,
+  },
+  searchContainer: {
+    backgroundColor: '#F7F7F7',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    flex: 1,
+    marginLeft: 10,
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    height: 35,
+  },
 });

@@ -1,8 +1,7 @@
-// services/authService.js
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://localhost:8000/api-docs';
+const API_URL = 'http://localhost:8000/auth/login';
 
 export async function login(email, senha) {
   try {
