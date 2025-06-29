@@ -5,10 +5,10 @@ import { login } from '../services/authService.js'
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
   async function handleLogin() {
-    const success = await login(email, senha);
+    const success = await login(email, password);
 
     if (success) {
       navigation.replace('Home');
@@ -35,8 +35,8 @@ export default function Login({ navigation }) {
       <Input
         placeholder="Digite sua senha"
         secureTextEntry={true}
-        value={senha}
-        onChangeText={setSenha}
+        value={password}
+        onChangeText={setPassword}
         inputContainerStyle={{ borderBottomWidth: 0 }}
         style={styles.input}
       />
@@ -65,6 +65,14 @@ const styles = StyleSheet.create({
     width: 280,
     height: 48,
     borderRadius: 50,
+    // Sombras para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+
+    // Sombra para Android
+    elevation: 4,
   },
   input: {
     backgroundColor: "#fff",
@@ -74,5 +82,18 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 50,
     padding: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderWidth: 2,
+    borderColor: "#7ac4e9",
+
+    // Sombras para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+
+    // Sombra para Android
+    elevation: 4,
   },
 });

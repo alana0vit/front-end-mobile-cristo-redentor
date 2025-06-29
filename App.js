@@ -42,7 +42,7 @@ export default function App() {
 
         <Stack.Screen name="Editar Idoso" component={EditarIdoso} options={{ headerTitleAlign: 'left' }} />
 
-        <Stack.Screen name="Stock" component={Stock} options={({ navigation }) => ({
+        <Stack.Screen name="Estoque" component={Stock} options={({ navigation }) => ({
           headerTitleAlign: 'left',
           headerRight: () => (
             <Ionicons

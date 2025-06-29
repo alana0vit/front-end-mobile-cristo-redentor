@@ -3,17 +3,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = 'http://localhost:8000/auth/login';
 
-export async function login(email, senha) {
+export async function login(email, password) {
   try {
     const response = await axios.post(API_URL, {
       email,
-      senha,
+      password,
     });
 
-    const token = response.data.token;
+    const { accessToken, refreshToken } = response.data;
 
     // Salvar token
-    await AsyncStorage.setItem('token', token);
+    await AsyncStorage.setItem('accessToken', accessToken);
+    await AsyncStorage.setItem('refreshToken', refreshToken);
     return true;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
@@ -26,5 +27,5 @@ export async function getToken() {
 }
 
 export async function logout() {
-  await AsyncStorage.removeItem('token');
+  await AsyncStorage.multiRemove(['accessToken', 'refreshToken']);
 }

@@ -1,28 +1,30 @@
-import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
 
-export default function PerfilIdoso({ navigation }) {
+export default function PerfilIdoso({ navigation, route }) {
+    const { name, iniciais, nascimento, mae, cpf } = route.params;
+
     return (
         <View style={styles.container}>
             <Avatar
                 rounded
-                title='AF'
+                title={iniciais}
                 containerStyle={styles.avatar}
                 size="xlarge"
             />
 
-            <View style={styles.infoBox}>
-                <Text style={styles.name}>Amy Farha</Text>
-                <Text style={styles.infoText}>Nascimento: 23/05/1962</Text>
-                <Text style={styles.infoText}>Mãe: Teresa Maria de Souza</Text>
-                <Text style={styles.infoText}>CPF: 111.222.333-44</Text>
+            <View style={styles.card}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.infoText}>Nascimento: {nascimento}</Text>
+                <Text style={styles.infoText}>Mãe: {mae}</Text>
+                <Text style={styles.infoText}>CPF: {cpf}</Text>
             </View>
 
-            <Button 
-                title="Editar" 
-                buttonStyle={styles.button} 
-                onPress={() => navigation.navigate('Editar Idoso')} 
+            <Button
+                title="Editar"
+                onPress={() => navigation.navigate('Editar Idoso')}
+                buttonStyle={styles.button}
+                titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
             />
         </View>
     );
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#666666',
         marginBottom: 25,
     },
-    infoBox: {
+    card: {
         backgroundColor: '#fff',
         padding: 20,
         borderRadius: 16,
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         elevation: 5,
         marginBottom: 30,
+        alignItems: 'center',
     },
     name: {
         fontSize: 22,
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: 16,
         color: '#666',
-        marginVertical: 2,
+        marginVertical: 4,
         textAlign: 'center',
     },
     button: {

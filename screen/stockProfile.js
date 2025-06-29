@@ -1,27 +1,50 @@
-import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
 
-export default function PerfilItem({ navigation }) {
+export default function PerfilItem({ navigation, route }) {
+    const { id, name, quantity, necessidade, categoria } = route.params;
+
+    // const getAvatarColor = (item) => {
+    //     if (item === 'Rémedio') {
+    //         return '';
+    //     } else if (item === 'Produto') {
+    //         return '';
+    //     } else {
+    //         return 'gray';
+    //     }
+    // };
+
+    const getAvatarIcon = (item) => {
+        if (item === 'Rémedio') {
+            return 'bottle-tonic-plus';
+        } else if (item === 'Produto') {
+            return 'broom';
+        } else {
+            return 'gray';
+        }
+    };
+
     return (
         <View style={styles.container}>
             <Avatar
                 rounded
+                icon={{ name: getAvatarIcon(categoria), type: 'material-community' }}
                 containerStyle={styles.avatar}
                 size="xlarge"
             />
 
-            <View style={styles.infoBox}>
-                <Text style={styles.name}>Vassoura</Text>
-                <Text style={styles.infoText}>Quantidade: 7</Text>
-                <Text style={styles.infoText}>Necesssário: Sim</Text>
-                <Text style={styles.infoText}>Categoria: Produto</Text>
+            <View style={styles.card}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.infoText}>Quantidade: {quantity}</Text>
+                <Text style={styles.infoText}>Necesssário: {necessidade}</Text>
+                <Text style={styles.infoText}>Categoria: {categoria}</Text>
             </View>
 
-            <Button 
-                title="Editar" 
-                buttonStyle={styles.button} 
-                onPress={() => navigation.navigate('Editar Item')} 
+            <Button
+                title="Editar"
+                buttonStyle={styles.button}
+                onPress={() => navigation.navigate('Editar Item')}
+                titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
             />
         </View>
     );
@@ -36,10 +59,10 @@ const styles = StyleSheet.create({
         padding: 30,
     },
     avatar: {
-        backgroundColor: '#2ce8ca',
+        backgroundColor: "#666",
         marginBottom: 25,
     },
-    infoBox: {
+    card: {
         backgroundColor: '#fff',
         padding: 20,
         borderRadius: 16,
@@ -50,6 +73,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         elevation: 5,
         marginBottom: 30,
+        alignItems: 'center',
     },
     name: {
         fontSize: 22,
@@ -61,7 +85,7 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: 16,
         color: '#666',
-        marginVertical: 2,
+        marginVertical: 4,
         textAlign: 'center',
     },
     button: {
