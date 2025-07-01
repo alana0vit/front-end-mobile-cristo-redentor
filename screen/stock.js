@@ -7,16 +7,16 @@ import { logout } from '../services/authService';
 // ESTA LISTA ESTÁ AQUI TEMPORARIAMENTE PARA FINS DE TESTE, ATÉ QUE SEJA FEITA A REQUISIÇÃO PRO BACK-END COM A VERDADEIRA LISTA DE IDOSOS //
 
 const list = [
-  { id: '1', name: 'Clonazepam', quantity: 15, necessidade: "Sim", categoria: 'Rémedio' },
-  { id: '2', name: 'Fralda geriátrica', quantity: 8, necessidade: "Não", categoria: 'Produto' },
-  { id: '3', name: 'Shampoo', quantity: 0, necessidade: "Sim", categoria: 'Produto' },
-  { id: '4', name: 'Vassoura', quantity: 2, necessidade: "Não", categoria: 'Produto' },
-  { id: '5', name: 'Dipirona', quantity: 4, necessidade: "Sim", categoria: 'Rémedio' },
-  { id: '6', name: 'Creme dental', quantity: 6, necessidade: "Não", categoria: 'Produto' },
-  { id: '7', name: 'Luva', quantity: 0, necessidade: "Sim", categoria: 'Produto' },
-  { id: '8', name: 'Losartana', quantity: 9, necessidade: "Não", categoria: 'Rémedio' },
-  { id: '9', name: 'Desifetante', quantity: 1, necessidade: "Sim", categoria: 'Produto' },
-  { id: '10', name: 'Sabão', quantity: 11, necessidade: "Não", categoria: 'Produto' },
+  { id: '1', name: 'Clonazepam', quantity: 15, necessidade: "Sim", categoria: 'remedio' },
+  { id: '2', name: 'Fralda geriátrica', quantity: 8, necessidade: "Não", categoria: 'produto' },
+  { id: '3', name: 'Shampoo', quantity: 0, necessidade: "Sim", categoria: 'produto' },
+  { id: '4', name: 'Vassoura', quantity: 2, necessidade: "Não", categoria: 'produto' },
+  { id: '5', name: 'Dipirona', quantity: 4, necessidade: "Sim", categoria: 'remedio' },
+  { id: '6', name: 'Creme dental', quantity: 6, necessidade: "Não", categoria: 'produto' },
+  { id: '7', name: 'Luva', quantity: 0, necessidade: "Sim", categoria: 'produto' },
+  { id: '8', name: 'Losartana', quantity: 9, necessidade: "Não", categoria: 'remedio' },
+  { id: '9', name: 'Desifetante', quantity: 1, necessidade: "Sim", categoria: 'produto' },
+  { id: '10', name: 'Sabão', quantity: 11, necessidade: "Não", categoria: 'produto' },
 ];
 
 // EXCLUIR ESTA LISTA ASSIM QUE A CONEXÃO COM O BACK-END ESTIVER ATIVA //

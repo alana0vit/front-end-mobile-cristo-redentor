@@ -1,39 +1,40 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
 export default function CadastroIdoso({ navigation }) {
   return (
     <View style={styles.container}>
-      <Input
-        style={styles.input}
-        placeholder='Digite o nome do(a) idoso(a)'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
+      <ScrollView>
+        <Text style={styles.label}>Nome do idoso:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
 
-      <Input
-        style={styles.input}
-        placeholder='Iniciais do(a) Idoso(a)'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
+        <Text style={styles.label}>Inicias do nome do idoso:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
 
-      <Input
-        style={styles.input}
-        placeholder='Data de nascimento'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
+        <Text style={styles.label}>Data de nascimento do idoso:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
 
-      <Input
-        style={styles.input}
-        placeholder='Nome da mãe do(a) idoso(a)'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
+        <Text style={styles.label}>Nome da mãe do idoso:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
 
-      <Input
-        style={styles.input}
-        placeholder='Digite o CPF do(a) idoso(a)'
-        inputContainerStyle={{ borderBottomWidth: 0 }}
-      />
+        <Text style={styles.label}>CPF do idoso:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
+      </ScrollView>
 
       <Button title="Cadastrar" buttonStyle={styles.button} />
     </View>
@@ -46,21 +47,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F7',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 30,
+    padding: 20,
   },
   input: {
     backgroundColor: "#fff",
     color: "black",
-    marginBottom: 30,
     width: 320,
     height: 48,
     borderRadius: 50,
     padding: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderWidth: 2,
+    borderColor: "#7ac4e9",
+
+    // Sombras para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+
+    // Sombra para Android
+    elevation: 4,
   },
   button: {
     backgroundColor: '#2CA8E8',
     width: 280,
     height: 48,
     borderRadius: 50,
+    marginBottom: 20,
+  },
+  label: {
+    alignSelf: 'flex-start',
+    margin: 10,
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#2CA8E8',
   },
 });

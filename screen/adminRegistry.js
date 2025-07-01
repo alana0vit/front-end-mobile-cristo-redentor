@@ -2,47 +2,64 @@ import { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-export default function EditarIdoso({ navigation }) {
+export default function CadastroAdmin({navigation}) {
     const [nome, setNome] = useState('');
-    const [iniciais, setIniciais] = useState('');
-    const [dataNasc, setDataNasc] = useState('');
-    const [nomeMae, setNomeMae] = useState('');
     const [cpf, setCpf] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [email, setEmail] = useState('');
+    const [crf, setCrf] = useState('');
+
+    const salvarAdmin = () => {
+        axios.post('http://localhost:8000/auth/register', {
+            nome: nome,
+            cpf: cpf,
+            telefone: telefone,
+            email: email,
+            crf: crf
+        }).then(function (response) {
+            console.log("Administrador cadastrado", response.data);
+            navigation.navigate('Login');
+        }).catch(function (error) {
+            console.log("Erro ao tentar cadastrar o administrador", error);
+        });
+    };
 
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Text style={styles.label}>Novo nome do idoso:</Text>
+                <Text style={styles.label}>Nome do farmacêutico:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }}
                     value={nome} onChange={setNome}
                 />
-                <Text style={styles.label}>Novas inicias:</Text>
-                <Input
-                    style={styles.input}
-                    inputContainerStyle={{ borderBottomWidth: 0 }} value={iniciais} onChange={setIniciais}
-                />
-                <Text style={styles.label}>Data de nascimento correta:</Text>
-                <Input
-                    style={styles.input}
-                    inputContainerStyle={{ borderBottomWidth: 0 }} value={dataNasc} onChange={setDataNasc}
-                />
-                <Text style={styles.label}>Nome correto da mãe:</Text>
-                <Input
-                    style={styles.input}
-                    inputContainerStyle={{ borderBottomWidth: 0 }} value={nomeMae} onChange={setNomeMae}
-                />
 
-                <Text style={styles.label}>CPF correto:</Text>
+                <Text style={styles.label}>CPF do farmacêutico:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }} value={cpf} onChange={setCpf}
                 />
+
+                <Text style={styles.label}>Telefone do farmacêutico:</Text>
+                <Input
+                    style={styles.input}
+                    inputContainerStyle={{ borderBottomWidth: 0 }} value={telefone} onChange={setTelefone}
+                />
+
+                <Text style={styles.label}>E-mail do farmacêutico:</Text>
+                <Input
+                    style={styles.input}
+                    inputContainerStyle={{ borderBottomWidth: 0 }} value={email} onChange={setEmail}
+                />
+
+                <Text style={styles.label}>CRF do farmacêutico:</Text>
+                <Input
+                    style={styles.input}
+                    inputContainerStyle={{ borderBottomWidth: 0 }} value={crf} onChange={setCrf}
+                />
             </ScrollView>
 
-            <Button title="Salvar" buttonStyle={styles.button} />
-            <Button title="Declarar óbito" buttonStyle={styles.buttonRed} />
+            <Button title="Cadastrar" buttonStyle={styles.button} onPress={salvarAdmin}/>
         </View>
     );
 }
@@ -81,7 +98,7 @@ const styles = StyleSheet.create({
         width: 280,
         height: 48,
         borderRadius: 50,
-        marginBottom: 10,
+        marginBottom: 20,
     },
     label: {
         alignSelf: 'flex-start',
@@ -89,12 +106,5 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '500',
         color: '#2CA8E8',
-    },
-    buttonRed: {
-        backgroundColor: '#e8522c',
-        width: 280,
-        height: 48,
-        borderRadius: 50,
-        marginBottom: 20,
     },
 });

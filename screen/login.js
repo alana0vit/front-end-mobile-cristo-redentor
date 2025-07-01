@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet, Image, Alert } from 'react-native';
+import { View, StyleSheet, Image, Alert, TouchableOpacity, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { login } from '../services/authService.js'
 
@@ -42,6 +42,15 @@ export default function Login({ navigation }) {
       />
 
       <Button title="Login" buttonStyle={styles.button} onPress={handleLogin} />
+
+      <TouchableOpacity style={styles.buttonLow} onPress={() => navigation.navigate('Cadastrar Admin')}>
+        <Text style={styles.buttonText}>Cadastrar Administrador</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonLow} onPress={() => navigation.navigate('Recuperar Senha')}>
+        <Text style={styles.buttonText}>Recuperar senha</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -73,6 +82,18 @@ const styles = StyleSheet.create({
 
     // Sombra para Android
     elevation: 4,
+  },
+  buttonLow: {
+    width: 280,
+    height: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F7F7F7',
+    borderRadius: 8,
+  },
+  buttonText: {
+    fontSize: 12,
+    color: '#2CA8E8',
   },
   input: {
     backgroundColor: "#fff",

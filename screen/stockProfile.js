@@ -4,20 +4,10 @@ import { Avatar, Button } from 'react-native-elements';
 export default function PerfilItem({ navigation, route }) {
     const { id, name, quantity, necessidade, categoria } = route.params;
 
-    // const getAvatarColor = (item) => {
-    //     if (item === 'Rémedio') {
-    //         return '';
-    //     } else if (item === 'Produto') {
-    //         return '';
-    //     } else {
-    //         return 'gray';
-    //     }
-    // };
-
     const getAvatarIcon = (item) => {
-        if (item === 'Rémedio') {
+        if (item === 'remedio') {
             return 'bottle-tonic-plus';
-        } else if (item === 'Produto') {
+        } else if (item === 'produto') {
             return 'broom';
         } else {
             return 'gray';
