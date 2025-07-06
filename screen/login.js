@@ -41,7 +41,7 @@ export default function Login({ navigation }) {
         style={styles.input}
       />
 
-      <Button title="Login" buttonStyle={styles.button} onPress={handleLogin} />
+      <Button title="Login" buttonStyle={styles.button} onPress={handleLogin} titleStyle={{ fontWeight: 'bold', fontSize: 16 }}/>
 
       <TouchableOpacity style={styles.buttonLow} onPress={() => navigation.navigate('Cadastrar Admin')}>
         <Text style={styles.buttonText}>Cadastrar Administrador</Text>

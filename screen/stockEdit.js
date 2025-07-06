@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
@@ -10,13 +10,13 @@ export default function EditarEstoque({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Text style={styles.label}>Novo nome do item:</Text>
+                <Text style={styles.label}>Editar nome:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }} value={nome} onChange={setNome}
                 />
 
-                <Text style={styles.label}>Necessario?</Text>
+                <Text style={styles.label}>Editar necessidade</Text>
                 <View style={styles.radioContainer}>
                     <TouchableOpacity
                         style={[
@@ -39,7 +39,7 @@ export default function EditarEstoque({ navigation }) {
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.label}>Categoria atual:</Text>
+                <Text style={styles.label}>Editar categoria:</Text>
                 <View style={styles.radioContainer}>
                     <TouchableOpacity
                         style={[
@@ -63,8 +63,7 @@ export default function EditarEstoque({ navigation }) {
                 </View>
             </ScrollView>
 
-            <Button title="Salvar" buttonStyle={styles.button} />
-            <Button title="Excluír" buttonStyle={styles.buttonRed} />
+            <Button title="Salvar" buttonStyle={styles.button} titleStyle={{ fontWeight: 'bold', fontSize: 16 }}/>
         </View>
     );
 }
@@ -104,13 +103,6 @@ const styles = StyleSheet.create({
         height: 48,
         borderRadius: 50,
         marginBottom: 10,
-    },
-    buttonRed: {
-        backgroundColor: '#e8522c',
-        width: 280,
-        height: 48,
-        borderRadius: 50,
-        marginBottom: 20,
     },
     label: {
         alignSelf: 'flex-start',

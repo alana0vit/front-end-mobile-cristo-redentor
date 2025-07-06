@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-export default function CadastroAdmin({navigation}) {
+export default function CadastroAdmin({ navigation }) {
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [telefone, setTelefone] = useState('');
@@ -59,7 +59,7 @@ export default function CadastroAdmin({navigation}) {
                 />
             </ScrollView>
 
-            <Button title="Cadastrar" buttonStyle={styles.button} onPress={salvarAdmin}/>
+            <Button title="Cadastrar" buttonStyle={styles.button} onPress={salvarAdmin} titleStyle={{ fontWeight: 'bold', fontSize: 16 }} />
         </View>
     );
 }

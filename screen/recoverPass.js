@@ -14,7 +14,7 @@ export default function RecuperarSenha() {
                 <Text style={styles.nota}>* Nota: o e-mail precisa ser o mesmo dado no cadastro. Ao apertar no botão "Recuperar", você receberá um e-mail com todas as instruções. Faça o que se pede e recupere seu acesso.</Text>
             </ScrollView>
 
-            <Button title="Recuperar" buttonStyle={styles.button} />
+            <Button title="Recuperar" buttonStyle={styles.button} titleStyle={{ fontWeight: 'bold', fontSize: 16 }}/>
         </View>
     );
 }

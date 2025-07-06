@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView, FlatList, TextInput } from 'react-native';
-import { Icon, SearchBar, Button } from 'react-native-elements';
+import { useState } from 'react';
+import { View, StyleSheet, Text, ScrollView, FlatList} from 'react-native';
+import { Icon, SearchBar} from 'react-native-elements';
 import axios from 'axios';
 import { logout } from '../services/authService';
 
@@ -22,63 +22,13 @@ const list = [
 // EXCLUIR ESTA LISTA ASSIM QUE A CONEXÃO COM O BACK-END ESTIVER ATIVA //
 
 export default function Stock({ navigation }) {
-  const [search, setSearch] = React.useState('');
+  const [search, setSearch] = useState('');
   const [stock, setStock] = useState(list);
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [actionType, setActionType] = useState(null); // 'add' ou 'remove'
-  const [quantityInput, setQuantityInput] = useState('');
 
   // Filtro da barra de pesquisa
   const filteredList = stock.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
-
-  const openQuantityModal = (item, type) => {
-    setSelectedItem(item);
-    setActionType(type);
-    setQuantityInput('');
-    setModalVisible(true);
-  };
-
-  const confirmQuantityChange = async () => {
-    const qty = parseInt(quantityInput);
-    if (isNaN(qty) || qty <= 0) {
-      alert('Digite uma quantidade válida');
-      return;
-    }
-
-    try {
-      const endpoint =
-        actionType === 'add' ? '/estoque/entrada' : '/estoque/saida';
-
-      await axios.post(endpoint, {
-        id: selectedItem.id,
-        quantidade: qty,
-      });
-
-      // Atualiza localmente após sucesso
-      setStock((prev) =>
-        prev.map((item) => {
-          if (item.id === selectedItem.id) {
-            const novaQuantidade =
-              actionType === 'add'
-                ? item.quantity + qty
-                : Math.max(item.quantity - qty, 0);
-
-            return { ...item, quantity: novaQuantidade };
-          }
-          return item;
-        })
-      );
-
-      setModalVisible(false);
-    } catch (error) {
-      console.error('Erro ao atualizar estoque:', error);
-      alert('Erro ao atualizar o estoque. Verifique a conexão ou tente novamente.');
-    }
-  };
 
   // Renderizando a lista
   const renderItem = ({ item }) => {
@@ -102,20 +52,6 @@ export default function Stock({ navigation }) {
             Quantidade: {item.quantity}
           </Text>
         </View>
-        <Button
-          title="➖"
-          type="outline"
-          onPress={() => openQuantityModal(item, 'remove')}
-          buttonStyle={styles.smallBtn}
-          titleStyle={styles.smallTitle}
-        />
-        <Button
-          title="➕"
-          type="outline"
-          onPress={() => openQuantityModal(item, 'add')}
-          buttonStyle={styles.smallBtn}
-          titleStyle={styles.smallTitle}
-        />
       </View>
     );
   };
@@ -149,28 +85,6 @@ export default function Stock({ navigation }) {
           navigation.replace('Login');
         }} />
       </View>
-
-      {/* Modal Simples */}
-      {modalVisible && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              {actionType === 'add' ? 'Adicionar' : 'Retirar'} quantidade
-            </Text>
-            <TextInput
-              placeholder="Digite a quantidade"
-              value={quantityInput}
-              onChangeText={setQuantityInput}
-              keyboardType="numeric"
-              style={styles.modalInput}
-            />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Button title="Cancelar" onPress={() => setModalVisible(false)} />
-              <Button title="Confirmar" onPress={confirmQuantityChange} />
-            </View>
-          </View>
-        </View>
-      )}
     </View>
   );
 }
@@ -203,18 +117,6 @@ const styles = StyleSheet.create({
     color: '#555',
     marginTop: 4,
   },
-  smallBtn: {
-    borderColor: '#2CA8E8',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    height: 36,
-    marginHorizontal: 4,
-  },
-  smallTitle: {
-    color: '#2CA8E8',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   bottomBar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -235,31 +137,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
     height: 35,
-  },
-  modalOverlay: {
-    position: 'absolute',
-    top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: '#000000',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10,
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  modalInput: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 8,
   },
 });

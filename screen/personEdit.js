@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-export default function EditarIdoso({ navigation }) {
+export default function EditarPessoa({ navigation }) {
     const [nome, setNome] = useState('');
-    const [iniciais, setIniciais] = useState('');
+    const [categoria, setCategoria] = useState('null');
     const [dataNasc, setDataNasc] = useState('');
     const [nomeMae, setNomeMae] = useState('');
     const [cpf, setCpf] = useState('');
@@ -12,37 +12,56 @@ export default function EditarIdoso({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Text style={styles.label}>Novo nome do idoso:</Text>
+                <Text style={styles.label}>Editar nome:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }}
                     value={nome} onChange={setNome}
                 />
-                <Text style={styles.label}>Novas inicias:</Text>
-                <Input
-                    style={styles.input}
-                    inputContainerStyle={{ borderBottomWidth: 0 }} value={iniciais} onChange={setIniciais}
-                />
-                <Text style={styles.label}>Data de nascimento correta:</Text>
+
+                <Text style={styles.label}>Editar categoria:</Text>
+                <View style={styles.radioContainer}>
+                    <TouchableOpacity
+                        style={[
+                            styles.radioButton,
+                            categoria === 'idoso' && styles.radioSelected,
+                        ]}
+                        onPress={() => setCategoria('idoso')}
+                    >
+                        <Text style={[styles.radioText, categoria === 'idoso' && { color: "#fff" },]}>Idoso</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[
+                            styles.radioButton,
+                            categoria === 'doador' && styles.radioSelected,
+                        ]}
+                        onPress={() => setCategoria('doador')}
+                    >
+                        <Text style={[styles.radioText, categoria === 'doador' && { color: '#fff' },]}>Doador</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <Text style={styles.label}>Editar data de nascimento:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }} value={dataNasc} onChange={setDataNasc}
                 />
-                <Text style={styles.label}>Nome correto da mãe:</Text>
+
+                <Text style={styles.label}>Editar nome da mãe:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }} value={nomeMae} onChange={setNomeMae}
                 />
 
-                <Text style={styles.label}>CPF correto:</Text>
+                <Text style={styles.label}>Editar CPF:</Text>
                 <Input
                     style={styles.input}
                     inputContainerStyle={{ borderBottomWidth: 0 }} value={cpf} onChange={setCpf}
                 />
             </ScrollView>
 
-            <Button title="Salvar" buttonStyle={styles.button} />
-            <Button title="Declarar óbito" buttonStyle={styles.buttonRed} />
+            <Button title="Salvar" buttonStyle={styles.button} titleStyle={{ fontWeight: 'bold', fontSize: 16 }}/>
         </View>
     );
 }
@@ -81,7 +100,7 @@ const styles = StyleSheet.create({
         width: 280,
         height: 48,
         borderRadius: 50,
-        marginBottom: 10,
+        marginBottom: 20,
     },
     label: {
         alignSelf: 'flex-start',
@@ -90,11 +109,24 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#2CA8E8',
     },
-    buttonRed: {
-        backgroundColor: '#e8522c',
-        width: 280,
-        height: 48,
-        borderRadius: 50,
-        marginBottom: 20,
+    radioContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: 20,
+    },
+    radioButton: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#2CA8E8',
+        borderRadius: 20,
+        width: 100,
+        alignItems: 'center',
+    },
+    radioText: {
+        color: '#2CA8E8',
+    },
+    radioSelected: {
+        color: '#fff',
+        backgroundColor: '#2CA8E8',
     },
 });

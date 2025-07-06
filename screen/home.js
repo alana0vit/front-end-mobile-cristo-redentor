@@ -6,47 +6,17 @@ import { logout } from '../services/authService';
 
 // ESTA LISTA ESTÁ AQUI TEMPORARIAMENTE PARA FINS DE TESTE, ATÉ QUE SEJA FEITA A REQUISIÇÃO PRO BACK-END COM A VERDADEIRA LISTA DE IDOSOS //
 
-const list = [
-  {
-    id: 1,
-    name: 'João Silva',
-    iniciais: 'JS',
-    nascimento: '1990-08-25',
-    cpf: '112.233.445-66',
-    mae: 'Ana Silva',
-  },
-  {
-    id: 2,
-    name: 'Ana Oliveira',
-    iniciais: 'AO',
-    nascimento: '1988-05-12',
-    cpf: '223.344.556-77',
-    mae: 'Sônia Oliveira',
-  },
-  {
-    id: 3,
-    name: 'Carlos Souza',
-    iniciais: 'CS',
-    nascimento: '1995-02-10',
-    cpf: '334.455.667-88',
-    mae: 'Tereza Souza',
-  },
-  {
-    id: 4,
-    name: 'Fernanda Costa',
-    iniciais: 'FC',
-    nascimento: '1992-09-15',
-    cpf: '445.566.778-99',
-    mae: 'Mariana Costa',
-  },
-  {
-    id: 5,
-    name: 'Roberto Pereira',
-    iniciais: 'RP',
-    nascimento: '1983-11-05',
-    cpf: '556.677.889-00',
-    mae: 'Luciana Pereira',
-  }
+export const list = [
+  { id: 1, name: 'João Silva', nascimento: '1990-08-25', cpf: '112.233.445-66', categoria: 'doador', mae: 'Ana Silva', },
+  { id: 2, name: 'Ana Oliveira', nascimento: '1988-05-12', cpf: '223.344.556-77', categoria: 'idoso', mae: 'Sônia Oliveira', },
+  { id: 3, name: 'Carlos Souza', nascimento: '1995-02-10', cpf: '334.455.667-88', categoria: 'idoso', mae: 'Tereza Souza', },
+  { id: 4, name: 'Fernanda Costa', nascimento: '1992-09-15', cpf: '445.566.778-99', categoria: 'doador', mae: 'Mariana Costa', },
+  { id: 5, name: 'Roberto Pereira', nascimento: '1983-11-05', cpf: '556.677.889-00', categoria: 'idoso', mae: 'Luciana Pereira', },
+  { id: 6, name: 'Jorge Silva', nascimento: '1990-08-25', cpf: '112.233.445-66', categoria: 'doador', mae: 'Ana Silva', },
+  { id: 7, name: 'Patricia Oliveira', nascimento: '1988-05-12', cpf: '223.344.556-77', categoria: 'doador', mae: 'Sônia Oliveira', },
+  { id: 8, name: 'Mario Souza', nascimento: '1995-02-10', cpf: '334.455.667-88', categoria: 'idoso', mae: 'Tereza Souza', },
+  { id: 9, name: 'Talita Costa', nascimento: '1992-09-15', cpf: '445.566.778-99', categoria: 'idoso', mae: 'Mariana Costa', },
+  { id: 10, name: 'Claudia Pereira', nascimento: '1983-11-05', cpf: '556.677.889-00', categoria: 'idoso', mae: 'Luciana Pereira', }
 ];
 
 // EXCLUIR ESTA LISTA ASSIM QUE A CONEXÃO COM O BACK-END ESTIVER ATIVA //
@@ -69,11 +39,21 @@ export default function Home({ navigation }) {
      checkAuth();
    }, []); */
 
+  const getAvatarIcon = (thing) => {
+    if (thing === 'idoso') {
+      return 'human-cane';
+    } else if (thing === 'doador') {
+      return 'hand-heart';
+    } else {
+      return 'gray';
+    }
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       <Avatar
         rounded
-        title={item.iniciais}
+        icon={{ name: getAvatarIcon(item.categoria), type: 'material-community' }}
         containerStyle={{ backgroundColor: '#666' }}
         size="small"
       />
@@ -84,13 +64,14 @@ export default function Home({ navigation }) {
         name="chevron-right"
         type="feather"
         color="#ccc"
-        onPress={() => navigation.navigate('Idoso', {
+        onPress={() => navigation.navigate('Perfil', {
           id: item.id,
           name: item.name,
-          iniciais: item.iniciais,
+          categoria: item.categoria,
           nascimento: item.nascimento,
           cpf: item.cpf,
-          mae: item.mae})}
+          mae: item.mae
+        })}
       />
     </View>
   );

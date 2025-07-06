@@ -1,87 +1,59 @@
+import { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import axios from 'axios';
-import { useState } from 'react';
 
-export default function CadastroItem() {
-  const [necessidade, setNecessidade] = useState(null);
+export default function CadastroPessoa({ navigation }) {
   const [categoria, setCategoria] = useState(null);
-
-  const enviarFormulario = async () => {
-    try {
-      const dados = {
-        necessidade,
-        categoria
-      };
-      const res = await axios.post('http://localhost:8000', dados);
-      Alert.alert('Sucesso', 'Formulário enviado!');
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Erro', 'Algo deu errado ao enviar.');
-    }
-  };
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.label}>Nome do item:</Text>
+        <Text style={styles.label}>Nome:</Text>
         <Input
           style={styles.input}
           inputContainerStyle={{ borderBottomWidth: 0 }}
         />
-
-        <Text style={styles.label}>Quantidade inicial:</Text>
-        <Input
-          style={styles.input}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
-        />
-
-        <Text style={styles.label}>Necessidade?</Text>
-        <View style={styles.radioContainer}>
-          <TouchableOpacity
-            style={[
-              styles.radioButton,
-              necessidade === 'sim' && styles.radioSelected,
-            ]}
-            onPress={() => setNecessidade('sim')}
-          >
-            <Text style={[styles.radioText, necessidade === 'sim' && { color: "#fff" },]}>Sim</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.radioButton,
-              necessidade === 'nao' && styles.radioSelected,
-            ]}
-            onPress={() => setNecessidade('nao')}
-          >
-            <Text style={[styles.radioText, necessidade === 'nao' && { color: '#fff' },]}>Não</Text>
-          </TouchableOpacity>
-        </View>
 
         <Text style={styles.label}>Categoria:</Text>
         <View style={styles.radioContainer}>
           <TouchableOpacity
             style={[
               styles.radioButton,
-              categoria === 'remedio' && styles.radioSelected,
+              categoria === 'idoso' && styles.radioSelected,
             ]}
-            onPress={() => setCategoria('remedio')}
+            onPress={() => setCategoria('idoso')}
           >
-            <Text style={[styles.radioText, categoria === 'remedio' && { color: "#fff" },]}>Remédio</Text>
+            <Text style={[styles.radioText, categoria === 'idoso' && { color: "#fff" },]}>Idoso</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[
               styles.radioButton,
-              categoria === 'produto' && styles.radioSelected,
+              categoria === 'doador' && styles.radioSelected,
             ]}
-            onPress={() => setCategoria('produto')}
+            onPress={() => setCategoria('doador')}
           >
-            <Text style={[styles.radioText, categoria === 'produto' && { color: '#fff' },]}>Produto</Text>
+            <Text style={[styles.radioText, categoria === 'doador' && { color: '#fff' },]}>Doador</Text>
           </TouchableOpacity>
         </View>
 
+        <Text style={styles.label}>Data de nascimento:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
+
+        <Text style={styles.label}>Nome da mãe:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
+
+        <Text style={styles.label}>CPF:</Text>
+        <Input
+          style={styles.input}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
+        />
       </ScrollView>
 
       <Button title="Cadastrar" buttonStyle={styles.button} titleStyle={{ fontWeight: 'bold', fontSize: 16 }}/>

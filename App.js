@@ -6,21 +6,23 @@ import Login from './screen/login.js';
 import RecuperarSenha from './screen/recoverPass.js';
 import CadastroAdmin from './screen/adminRegistry.js';
 import Home from './screen/home.js';
-import PerfilIdoso from './screen/elderlyProfile.js';
-import CadastroIdoso from './screen/elderlyRegistry.js';
-import EditarIdoso from './screen/elderlyEdit.js';
+import PerfilPessoa from './screen/personProfile.js';
+import CadastroPessoa from './screen/personRegistry.js';
+import EditarPessoa from './screen/personEdit.js';
 import Loading from './screen/loading.js';
 import Stock from './screen/stock.js';
 import PerfilItem from './screen/stockProfile.js';
 import CadastroItem from './screen/stockRegistry.js';
 import EditarEstoque from './screen/stockEdit.js';
+import EntradaSaida from './screen/inOutStock.js';
+import Historico from './screen/inOutHistory.js';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Loading'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen name="Loading" component={Loading} options={{ headerShown: false }} />
 
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -53,12 +55,12 @@ export default function App() {
               size={24}
               color="#fff"
               style={{ marginRight: 15 }}
-              onPress={() => navigation.navigate('Cadastrar Idoso')}
+              onPress={() => navigation.navigate('Cadastrar Pessoa')}
             />
           ),
         })} />
 
-        <Stack.Screen name="Idoso" component={PerfilIdoso} options={{
+        <Stack.Screen name="Perfil" component={PerfilPessoa} options={{
           headerTitleAlign: 'left',
           headerTintColor: '#fff',
           headerStyle: {
@@ -66,7 +68,7 @@ export default function App() {
           },
         }} />
 
-        <Stack.Screen name="Cadastrar Idoso" component={CadastroIdoso} options={{
+        <Stack.Screen name="Cadastrar Pessoa" component={CadastroPessoa} options={{
           headerTitleAlign: 'left',
           headerTintColor: '#fff',
           headerStyle: {
@@ -74,7 +76,7 @@ export default function App() {
           },
         }} />
 
-        <Stack.Screen name="Editar Idoso" component={EditarIdoso} options={{
+        <Stack.Screen name="Editar Perfil" component={EditarPessoa} options={{
           headerTitleAlign: 'left',
           headerTintColor: '#fff',
           headerStyle: {
@@ -114,7 +116,24 @@ export default function App() {
             backgroundColor: '#2CA8E8',
           },
         }} />
+
         <Stack.Screen name="Editar Item" component={EditarEstoque} options={{
+          headerTitleAlign: 'left',
+          headerTintColor: '#fff',
+          headerStyle: {
+            backgroundColor: '#2CA8E8',
+          },
+        }} />
+
+        <Stack.Screen name="Alterar Estoque" component={EntradaSaida} options={{
+          headerTitleAlign: 'left',
+          headerTintColor: '#fff',
+          headerStyle: {
+            backgroundColor: '#2CA8E8',
+          },
+        }} />
+
+        <Stack.Screen name="Historico" component={Historico} options={{
           headerTitleAlign: 'left',
           headerTintColor: '#fff',
           headerStyle: {

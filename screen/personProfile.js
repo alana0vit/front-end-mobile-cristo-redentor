@@ -1,14 +1,24 @@
 import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
 
-export default function PerfilIdoso({ navigation, route }) {
-    const { name, iniciais, nascimento, mae, cpf } = route.params;
+export default function PerfilPessoa({ navigation, route }) {
+    const { id, name, categoria, nascimento, mae, cpf } = route.params;
+
+    const getAvatarIcon = (thing) => {
+        if (thing === 'idoso') {
+            return 'human-cane';
+        } else if (thing === 'doador') {
+            return 'hand-heart';
+        } else {
+            return 'gray';
+        }
+    };
 
     return (
         <View style={styles.container}>
             <Avatar
                 rounded
-                title={iniciais}
+                icon={{ name: getAvatarIcon(categoria), type: 'material-community' }}
                 containerStyle={styles.avatar}
                 size="xlarge"
             />
@@ -18,12 +28,19 @@ export default function PerfilIdoso({ navigation, route }) {
                 <Text style={styles.infoText}>Nascimento: {nascimento}</Text>
                 <Text style={styles.infoText}>Mãe: {mae}</Text>
                 <Text style={styles.infoText}>CPF: {cpf}</Text>
+                <Text style={styles.infoText}>Categoria: {categoria}</Text>
             </View>
 
             <Button
                 title="Editar"
-                onPress={() => navigation.navigate('Editar Idoso')}
+                onPress={() => navigation.navigate('Editar Perfil')}
                 buttonStyle={styles.button}
+                titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
+            />
+
+            <Button
+                title="Excluir"
+                buttonStyle={styles.buttonRed}
                 titleStyle={{ fontWeight: 'bold', fontSize: 16 }}
             />
         </View>
@@ -70,6 +87,13 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#2CA8E8',
+        width: 280,
+        height: 48,
+        borderRadius: 50,
+        marginBottom: 10,
+    },
+    buttonRed: {
+        backgroundColor: '#e8522c',
         width: 280,
         height: 48,
         borderRadius: 50,
